@@ -24,27 +24,23 @@ class MovieSerializer(serializers.ModelSerializer):
             '99popularity': {'source': 'popularity'}
         }
 
-    def add_movie_genres(self, movie_obj, genre_list):
-        """Associates list of genre objects to movie obj"""
-
-        for genre in genre_list:
-            movie_obj.genres.add(genre)
-        movie_obj.save()
-
     def create(self, validated_data):
         """Override 'create' method to enable writing to M2M related field
 
         Notes
         -----
         Pop genre list from validated data before creating Movie instance.
-        Call 'add_movie_genres' to associate list of genre objects to movie obj
+        Associate list of genre objects to movie obj
         """
 
         # Create movie instance after popping genre list from dict
         genre_list = validated_data.pop('genres', list())
         movie_obj = Movie.objects.create(**validated_data)
 
-        self.add_movie_genres(movie_obj, genre_list)
+        # Associates list of genre objects to movie obj
+        for genre in genre_list:
+            movie_obj.genres.add(genre)
+        movie_obj.save()
 
         return movie_obj
 
@@ -52,10 +48,10 @@ class MovieSerializer(serializers.ModelSerializer):
         """Override 'update' method to enable writing to M2M related field"""
 
         for attr, value in validated_data.items():
-            # If attribute 'genres' in dict items,
-            # call 'add_movie_genres' to associate genres to instance
+            # If attribute 'genres' in dict items, associate genres to instance
             if attr == 'genres':
-                self.add_movie_genres(instance, value)
+                for genre in value:
+                    instance.genres.add(genre)
             else:
                 setattr(instance, attr, value)
         instance.save()

@@ -1,7 +1,5 @@
 from rest_framework.relations import PrimaryKeyRelatedField
 
-from django.core.exceptions import ObjectDoesNotExist
-
 
 class GetOrCreatePrimaryKeyRelatedField(PrimaryKeyRelatedField):
     """Field creates related object if not found"""
@@ -16,8 +14,7 @@ class GetOrCreatePrimaryKeyRelatedField(PrimaryKeyRelatedField):
         if self.pk_field is not None:
             data = self.pk_field.to_internal_value(data)
         try:
-            return self.get_queryset().get(pk=data)
-        except ObjectDoesNotExist:
-            return self.model.objects.create(pk=data)
+            instance, _ = self.model.objects.get_or_create(pk=data)
+            return instance
         except (TypeError, ValueError):
             self.fail('incorrect_type', data_type=type(data).__name__)

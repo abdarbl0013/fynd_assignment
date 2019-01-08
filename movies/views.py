@@ -1,4 +1,3 @@
-# from rest_framework import filters
 from rest_framework.permissions import IsAdminUser
 from rest_framework.generics import CreateAPIView, ListAPIView, \
     RetrieveUpdateDestroyAPIView
@@ -33,5 +32,4 @@ class MovieSearchView(ListAPIView):
     serializer_class = MovieSerializer
     queryset = Movie.objects.all()
     filter_backends = (filters.DjangoFilterBackend,)
-    # search_fields = ('name', 'director')
     filterset_class = MovieFilter
