@@ -78,8 +78,11 @@ WSGI_APPLICATION = 'fynd_assignment.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'ba725f625d725c',
+        'PASSWORD': 'b5e1cb32',
+        'HOST': 'us-cdbr-iron-east-01.cleardb.net',
+        'PORT': '3306',
     }
 }
 
@@ -126,3 +129,9 @@ STATIC_URL = '/static/'
 import django_heroku
 django_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
+
+# Import Local settings
+try:
+    from .local_settings import *
+except ImportError as e:
+    pass
