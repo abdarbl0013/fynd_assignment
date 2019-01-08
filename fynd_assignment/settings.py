@@ -73,20 +73,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'fynd_assignment.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'USER': 'ba725f625d725c',
-        'PASSWORD': 'b5e1cb32',
-        'HOST': 'us-cdbr-iron-east-01.cleardb.net',
-        'PORT': '3306',
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
