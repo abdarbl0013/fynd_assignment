@@ -122,6 +122,6 @@ except ImportError as e:
     pass
 
 # Update Database options
-DATABASES['default']['options'] = {
+DATABASES['default']['OPTIONS'] = {
     'sql_mode': 'STRICT_TRANS_TABLES'
 }
