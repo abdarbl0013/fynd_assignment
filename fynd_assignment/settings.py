@@ -25,7 +25,7 @@ SECRET_KEY = 'tab8s&2eh%1a+umi78m+-hzcbp7j3bp+cl$efmloprteig0fwt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://cine-collection.herokuapp.com']
 
 
 # Application definition
