@@ -1,14 +1,15 @@
 from rest_framework import serializers
 
 from .models import Movie, Genre
+from .custom_fields import GetOrCreatePrimaryKeyRelatedField
 
 
 class MovieSerializer(serializers.ModelSerializer):
     """Serialize / deserialize Movie data"""
 
-    genre = serializers.PrimaryKeyRelatedField(
+    genre = GetOrCreatePrimaryKeyRelatedField(
         queryset=Genre.objects.all(), many=True,
-        source='genres', required=False,
+        source='genres', required=False, model=Genre,
         pk_field=serializers.CharField(max_length=20, trim_whitespace=True)
     )
 
