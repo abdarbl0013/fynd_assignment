@@ -120,3 +120,8 @@ try:
     from .local_settings import *
 except ImportError as e:
     pass
+
+# Update Database options
+DATABASES['default']['options'] = {
+    'sql_mode': 'STRICT_TRANS_TABLES'
+}
