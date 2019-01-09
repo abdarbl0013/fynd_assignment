@@ -115,11 +115,13 @@ STATIC_URL = '/static/'
 import django_heroku
 django_heroku.settings(locals())
 
+
 # Import Local settings
 try:
     from .local_settings import *
 except ImportError as e:
     pass
+
 
 # Update Database options
 DATABASES['default']['OPTIONS'] = {
