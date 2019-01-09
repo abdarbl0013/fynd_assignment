@@ -12,7 +12,8 @@ class UserSerializer(serializers.ModelSerializer):
 
         model = User
         fields = ('first_name', 'last_name', 'username', 'password', 'email',
-                  'is_staff')
+                  'is_staff', 'id')
+        read_only_fields = ('id',)
         extra_kwargs = {
             'password': {'write_only': True}
         }
@@ -27,6 +28,7 @@ class UserSerializer(serializers.ModelSerializer):
         """
         if self.instance and attrs.get('password'):
             raise ValidationError('Password update is not allowed')
+        return attrs
 
     def create(self, validated_data):
         """Uses 'create_user' instead of 'create' to create User"""

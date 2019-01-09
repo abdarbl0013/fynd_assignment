@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .models import Movie, Genre
-from .custom_fields import GetOrCreatePrimaryKeyRelatedField
+from utils.custom_fields import GetOrCreatePrimaryKeyRelatedField
 
 
 class MovieSerializer(serializers.ModelSerializer):

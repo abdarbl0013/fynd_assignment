@@ -1,6 +1,6 @@
 from django_filters import rest_framework as filters
 
-from .models import Movie
+from movies.models import Movie
 
 
 class MovieFilter(filters.FilterSet):

@@ -1,8 +1,9 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import CreateAPIView, RetrieveDestroyAPIView
 
+from utils.mixins import PartialUpdateMixin
 from .serializers import UserSerializer, ChangePasswordSerializer
 
 
@@ -46,7 +47,7 @@ class ChangePasswordView(CreateAPIView):
         return Response("Success.", status=status.HTTP_200_OK)
 
 
-class UserDetailsView(RetrieveUpdateDestroyAPIView):
+class UserDetailsView(RetrieveDestroyAPIView, PartialUpdateMixin):
     """View implements Update, Retrieve and Delete operation on User"""
 
     serializer_class = UserSerializer

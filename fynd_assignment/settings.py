@@ -72,6 +72,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'fynd_assignment.wsgi.application'
 
+# Rest framework global settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
