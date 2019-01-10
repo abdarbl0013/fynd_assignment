@@ -150,8 +150,9 @@ class MovieTestCase(TestCase):
         """Test API to read movie instance"""
 
         url = '/movie/{0}/'.format(self.sample_movie.id)
+        headers = {'HTTP_AUTHORIZATION': self.auth_header}
 
-        response = self.client.get(url)
+        response = self.client.get(url, **headers)
         self.assertTrue(status.is_success(response.status_code))
         response_data = response.data
         self.assertEqual(self.sample_movie.name, response_data['name'])

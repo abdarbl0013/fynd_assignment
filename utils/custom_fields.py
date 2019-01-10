@@ -2,7 +2,13 @@ from rest_framework.relations import PrimaryKeyRelatedField
 
 
 class GetOrCreatePrimaryKeyRelatedField(PrimaryKeyRelatedField):
-    """Field creates related object if not found"""
+    """Custom PrimaryRelatedField
+    
+    Notes
+    -----
+    If primary value provided doesn't exist in DB,
+    Field creates related object with primary key
+    """
 
     def __init__(self, **kwargs):
         self.model = kwargs.pop('model')

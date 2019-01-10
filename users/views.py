@@ -14,17 +14,38 @@ class UserRegisterView(CreateAPIView):
 
 
 class ChangePasswordView(CreateAPIView):
-    """View to change User password"""
+    """View to change User password
+    
+    Notes
+    -----
+    Only authenticated user are allowed to change password.
+    """
 
     serializer_class = ChangePasswordSerializer
     permission_classes = (IsAuthenticated,)
 
     def get_object(self):
-        """Get User object"""
+        """Get User object
+        
+        Returns
+        -------
+        <django.contrib.auth.models.User> :
+            Authenticated User object
+        """
+        
         return self.request.user
 
     def post(self, request, *args, **kwargs):
         """Change User password
+        
+        Parameters
+        ----------
+        request : <rest_framework.requests.Request>
+            Request Object with data
+                {
+                    'old_password': 'string',
+                    'new_password': 'string1'
+                }
 
         Notes
         -----
@@ -33,6 +54,7 @@ class ChangePasswordView(CreateAPIView):
         """
         user = self.get_object()
 
+        # Validated request data with serializer
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
@@ -48,13 +70,24 @@ class ChangePasswordView(CreateAPIView):
 
 
 class UserDetailsView(RetrieveDestroyAPIView, PartialUpdateMixin):
-    """View implements Update, Retrieve and Delete operation on User"""
+    """View implements Update, Retrieve and Delete operation on User
+    
+    Notes
+    -----
+    Only authenticated user are allowed to update, read or delete User details.
+    """
 
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
 
     def get_object(self):
-        """Get User Object."""
+        """Get User Object.
+        
+        Returns
+        -------
+        <django.contrib.auth.models.User> :
+            Authenticated User object
+        """
         return self.request.user
 
     def perform_destroy(self, instance):

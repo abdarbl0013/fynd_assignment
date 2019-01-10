@@ -8,6 +8,8 @@ class Genre(models.Model):
     genre_name = models.CharField(max_length=20, primary_key=True)
 
     def __str__(self):
+        """Define human-readable representation of Genre model"""
+
         return self.genre_name
 
 
@@ -28,4 +30,6 @@ class Movie(models.Model):
         unique_together = ('name', 'director')
 
     def __str__(self):
+        """Define human-readable representation of Movie model"""
+
         return self.name

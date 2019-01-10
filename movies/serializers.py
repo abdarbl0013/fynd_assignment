@@ -5,7 +5,18 @@ from utils.custom_fields import GetOrCreatePrimaryKeyRelatedField
 
 
 class MovieSerializer(serializers.ModelSerializer):
-    """Serialize / deserialize Movie data"""
+    """Serialize / deserialize Movie data
+
+    Notes
+    -----
+    Customizations :
+    1. Custom PrimaryRelatedField is used for genre. it will create
+    the instance of genre that are not found in DB. Also trim whitespaces
+    from genre strings
+
+    2. Map '99popularity' field is request payload to 'popularity' before
+    saving to DB
+    """
 
     genre = GetOrCreatePrimaryKeyRelatedField(
         queryset=Genre.objects.all(), many=True,
